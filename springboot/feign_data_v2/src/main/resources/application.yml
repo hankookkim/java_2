@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: feign_data_v2
+server:
+  port: 9983

@@ -1,0 +1,6 @@
+ spring:
+    application:
+      name: basic_board_review
+ server:
+   port:
+

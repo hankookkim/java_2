@@ -6,7 +6,9 @@ import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -70,5 +72,17 @@ public class DataController {
         DataResponseDto dataResponseDto = dataStore.get(id);
         dataStore.remove(id);
         return dataResponseDto;
+    }
+
+    @GetMapping("/all")
+    public List<DataResponseDto> getAll() {
+        log.info("[Feign Data] getAll");
+        List<DataResponseDto> results=new ArrayList<>();
+
+        for (Long id : dataStore.keySet()) {
+            DataResponseDto dataResponseDto = dataStore.get(id);
+            results.add(dataResponseDto);
+        }
+        return results;
     }
 }

@@ -1,9 +1,12 @@
 package com.example.feign_client.controller;
 
 import com.example.feign_client.client.ExampleClient;
+import com.example.feign_client.dto.DataResponseDto;
 import com.example.feign_client.service.ExampleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,4 +38,9 @@ public String deleteData(@PathVariable Long id){
         return exampleService.deleteData(id);
 
     }
+    @GetMapping("/all")
+    public List<DataResponseDto> getAllData(){
+        return exampleService.getAllData();
+    }
+
 }

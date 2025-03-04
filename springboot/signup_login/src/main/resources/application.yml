@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: signup_login
+server:
+  port: 8083

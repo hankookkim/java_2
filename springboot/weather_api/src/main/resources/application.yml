@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: weather_api
+
+weather:
+  api:
+    key: VoUtpYTPcfOxD4syxlkQjt5V9d9N7NRW9jpFtpKYuO7zk8rA83sQt8K/rHHmoH7piwoWuOOkKO01ZzkRBxJ6zA==
+
+    url: "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"
+server:
+  port: 8081
+

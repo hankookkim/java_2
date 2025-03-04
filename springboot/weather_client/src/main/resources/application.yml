@@ -1,0 +1,7 @@
+spring:
+  application:
+   name: weather_client
+server:
+  port: 8082
+feign-data:
+  url: "http://localhost:8081"

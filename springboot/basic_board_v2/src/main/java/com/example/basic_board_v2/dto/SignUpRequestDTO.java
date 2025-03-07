@@ -1,30 +1,28 @@
-package com.example.basic_boardv1.dto;
+package com.example.basic_board_v2.dto;
 
 
-import com.example.basic_boardv1.model.Member;
-import lombok.Builder;
+import com.example.basic_board_v2.model.Member;
+import com.example.basic_board_v2.type.Role;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Getter
 @ToString
-@Builder
 public class SignUpRequestDTO {
 
     private String userId;
     private String password;
     private String userName;
-
-
+    private Role role;
 
     public Member toMember(BCryptPasswordEncoder bCryptPasswordEncoder) {
         return Member.builder()
                 .userId(userId)
                 .password(bCryptPasswordEncoder.encode(password))
                 .userName(userName)
+                .role(role)
                 .build();
-    }
-//BCryptPasswordEncoder: 비밀번호를 안전하게 암호화하기 위해 사용됩니다.
 
+    }
 }

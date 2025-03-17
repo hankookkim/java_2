@@ -1,6 +1,8 @@
 package com.example.basic_boardv1.controller;
 
 
+import com.example.basic_boardv1.dto.SignInRequestDTO;
+import com.example.basic_boardv1.dto.SignInResponseDTO;
 import com.example.basic_boardv1.dto.SignUpRequestDTO;
 import com.example.basic_boardv1.dto.SignUpResponseDTO;
 import com.example.basic_boardv1.service.MemberService;
@@ -26,10 +28,10 @@ public class MemberApiController {
                 .build();
     }
 
-//    @PostMapping("/login")
-//    public SignInResponseDTO join(@RequestBody SignInRequestDTO signInRequestDTO) {
-//        System.out.println("signInRequestDTO :: " + signInRequestDTO);
-//        return SignInResponseDTO.builder()
-//                .build();
-//    }
+    @PostMapping("/login")
+    public SignInResponseDTO join(@RequestBody SignInRequestDTO signInRequestDTO) {
+        System.out.println("signInRequestDTO :: " + signInRequestDTO);
+        return SignInResponseDTO.builder()
+                .build();
+    }
 }

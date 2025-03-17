@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ public class MemberApiController {
     @PostMapping("/join")
     public SignUpResponseDTO signUp(@RequestBody SignUpRequestDTO signUpRequestDTO) {
         System.out.println(signUpRequestDTO);
+        System.out.println("Received role: " + signUpRequestDTO.getRole());
         memberService.signUp(signUpRequestDTO.toMember(bCryptPasswordEncoder));
         return SignUpResponseDTO.builder()
                 .successed(true)
@@ -86,6 +88,9 @@ public class MemberApiController {
                 .role(member.getRole())
                 .build();
     }
+
+
+
 
 
 }

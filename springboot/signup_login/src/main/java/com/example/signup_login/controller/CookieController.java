@@ -27,6 +27,8 @@ public class CookieController {
     public String login(){
         return "login-cookie";
     }
+
+
     @PostMapping("/login-cookie")
     public String loginExc(@RequestParam String username,
                                HttpServletResponse response,

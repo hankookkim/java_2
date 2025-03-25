@@ -1,0 +1,15 @@
+CREATE DATABASE IF NOT EXISTS `info`;
+
+USE `info`;
+
+
+CREATE TABLE member (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    member_id VARCHAR(13) NOT NULL,
+    member_name VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(255) NOT NULL,
+    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    version INT DEFAULT 0,
+    CONSTRAINT chk_member_id_format CHECK (member_id REGEXP '^[0-9]{10}$|^[0-9]{13}$')
+);

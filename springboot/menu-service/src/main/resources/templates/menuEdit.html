@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>메뉴 수정</title>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/menuEdit.js}"></script>
+    <link th:href="@{/css/menuAdmin.css}" rel="stylesheet">
+</head>
+<body>
+<h2>메뉴 수정</h2>
+
+<form id="menuEditForm" th:action="@{/menus/update}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="uid" th:value="${menu.uid}">
+
+    <label>메뉴 이름:</label>
+    <input type="text" id="menuName" name="menuName" th:value="${menu.menuName}" required><br>
+
+    <label>가격:</label>
+    <input type="number" name="price" th:value="${menu.price}" required><br>
+
+    <label>칼로리:</label>
+    <input type="number" name="calorie" step="0.1" th:value="${menu.calorie}" required><br>
+
+    <label>빵 선택:</label>
+    <select name="bread">
+        <option value="">빵을 선택하세요</option>
+        <option th:each="bread : ${breads}" th:value="${bread.uid}" th:text="${bread.breadName}"
+                th:selected="${menu.bread.uid == bread.uid}"></option>
+    </select><br>
+
+    <label>메인 재료 1:</label>
+    <select name="material1">
+        <option value="">재료를 선택하세요</option>
+        <option th:each="mat : ${materials}" th:value="${mat.uid}" th:text="${mat.materialName}"
+                th:selected="${menu.material1.uid == mat.uid}"></option>
+    </select><br>
+
+    <label>추가 재료:</label>
+    <select name="material2">
+        <option value="">선택 안 함</option>
+        <option th:each="mat : ${materials}" th:value="${mat.uid}" th:text="${mat.materialName}"
+                th:selected="${menu.material2 != null and menu.material2.uid == mat.uid}"></option>
+    </select>
+    <select name="material3">
+        <option value="">선택 안 함</option>
+        <option th:each="mat : ${materials}" th:value="${mat.uid}" th:text="${mat.materialName}"
+                th:selected="${menu.material3 != null and menu.material3.uid == mat.uid}"></option>
+    </select><br>
+
+    <label>치즈 선택:</label>
+    <select name="cheese">
+        <option value="">선택 안 함</option>
+        <option th:each="ch : ${cheeses}" th:value="${ch.uid}" th:text="${ch.cheeseName}"
+                th:selected="${menu.cheese != null and menu.cheese.uid == ch.uid}"></option>
+    </select><br>
+
+    <label>채소 선택:</label>
+    <div class="select-group">
+        <div th:each="i : ${#numbers.sequence(1, 8)}">
+            <select th:name="'vegetable' + ${i}">
+                <option value="">선택 안 함</option>
+                <option th:each="veg : ${vegetables}" th:value="${veg.uid}" th:text="${veg.vegetableName}"
+                        th:selected="${menu['vegetable' + i] != null and menu['vegetable' + i].uid == veg.uid}"></option>
+            </select>
+        </div>
+    </div><br>
+
+    <label>소스 선택:</label>
+    <div class="select-group">
+        <div th:each="i : ${#numbers.sequence(1, 3)}">
+            <select th:name="'sauce' + ${i}">
+                <option value="">선택 안 함</option>
+                <option th:each="sauce : ${sauces}" th:value="${sauce.uid}" th:text="${sauce.sauceName}"
+                        th:selected="${menu['sauce' + i] != null and menu['sauce' + i].uid == sauce.uid}"></option>
+            </select>
+        </div>
+    </div><br>
+
+    <label>현재 이미지:</label><br>
+    <img th:src="${menu.img}" alt="메뉴 이미지" width="100"><br>
+
+    <label>새 이미지 업로드:</label>
+    <input type="file" id="img" name="file" accept="image/*"><br>
+    <input type="hidden" id="imgUrl" name="img" th:value="${menu.img}">
+
+    <label>상태:</label>
+    <select name="status">
+        <option value="active" th:selected="${menu.status == 'ACTIVE'}">ACTIVE</option>
+        <option value="deleted" th:selected="${menu.status == 'DELETED'}">DELETED</option>
+    </select><br>
+
+    <div class="form-actions">
+        <button type="button" class="btn" id="updateBtn">수정하기</button>
+        <button type="button" class="btn cancel-btn" onclick="location.href='/menus/list'">목록으로 가기</button>
+    </div>
+</form>
+</body>
+</html>

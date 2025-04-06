@@ -9,8 +9,6 @@ $(document).ready(() => {
             password : password
         }
 
-        console.log(formData)
-
         $.ajax({
             type: 'POST',
             url: '/login',

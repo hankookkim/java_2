@@ -3,8 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.basic_board_v2.mapper.MemberMapper">
 
-
-    <resultMap id="memberResultMap" type="com.example.basic_board_v2.model.Member">
+    <resultMap id="memberResultMap" type="Member">
         <result property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="password" column="password"/>
@@ -12,7 +11,7 @@
         <result property="role" column="role"/>
     </resultMap>
 
-    <insert id="saved" parameterType="com.example.basic_board_v2.model.Member">
+    <insert id="saved" parameterType="Member">
         INSERT INTO member (user_id, password, user_name, role)
         VALUES (#{userId}, #{password}, #{userName}, #{role});
     </insert>

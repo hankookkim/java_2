@@ -1,10 +1,13 @@
 package com.example.basic_board_v2.service;
 
 
+import com.example.basic_board_v2.dto.BoardDeleteRequestDTO;
 import com.example.basic_board_v2.mapper.BoardMapper;
 import com.example.basic_board_v2.model.Article;
 import com.example.basic_board_v2.model.Paging;
+
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,5 +50,42 @@ public class BoardService {
 
     public int getTotalArticleCnt() {
         return boardMapper.getArticleCnt();
+    }
+
+    public Article getBoardDetail(long id) {
+        return boardMapper.getArticleById(id);
+    }
+
+    public Resource downloadFile(String fileName) {
+        return fileService.downloadFile(fileName);
+    }
+
+    public void updateArticle(Long id, String title, String content, MultipartFile file, Boolean fileChanged, String filePath) {
+        String path = null;
+
+        if (!file.isEmpty()) {
+            path = fileService.fileUpLoad(file);
+        }
+
+        if (fileChanged) {
+            fileService.deleteFile(filePath);
+        } else {
+            path = filePath;
+        }
+
+        boardMapper.updateArticle(
+                Article.builder()
+                        .id(id)
+                        .title(title)
+                        .content(content)
+                        .filePath(path)
+                        .build()
+        );
+
+    }
+
+    public void deleteBoardById(long id, BoardDeleteRequestDTO requestDTO) {
+        fileService.deleteFile(requestDTO.getFilePath());
+        boardMapper.deleteBoardById(id);
     }
 }

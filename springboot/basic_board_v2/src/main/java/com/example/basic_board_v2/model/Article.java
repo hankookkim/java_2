@@ -1,6 +1,7 @@
 package com.example.basic_board_v2.model;
 
 
+import com.example.basic_board_v2.dto.BoardDetailResponseDTO;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -16,5 +17,15 @@ public class Article {
     private String filePath;
     private LocalDateTime created;
     private LocalDateTime updated;
+
+    public BoardDetailResponseDTO toBoardDetailResponseDTO(){
+        return BoardDetailResponseDTO.builder()
+                .title(title)
+                .content(content)
+                .userId(userId)
+                .filePath(filePath)
+                .created(created)
+                .build();
+    }
 
 }
